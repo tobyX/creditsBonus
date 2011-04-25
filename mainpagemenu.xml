@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE import SYSTEM "DTD/import.dtd">
+<data>
+	<import>
+		<userguthabenmainpage name="wcf.guthaben.mainpage.coupon">
+			<icon>guthabenCouponL.png</icon>
+			<link>form=guthabenCoupon</link>
+			<description>wcf.guthaben.mainpage.coupon.description</description>
+			<parent>shopPage</parent>
+			<permissions>guthaben.coupon.canuse</permissions>
+		</userguthabenmainpage>
+	</import>
+</data>

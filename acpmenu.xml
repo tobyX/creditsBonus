@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE data SYSTEM "DTDs/acpMenu.dtd">
+<data>
+	<import>
+		<acpmenuitem name="wcf.acp.menu.link.content.guthaben">
+			<parent>wcf.acp.menu.link.content</parent>
+		</acpmenuitem>
+		
+		<acpmenuitem name="wcf.acp.menu.link.content.guthaben.couponlist">
+			<icon>icon/guthabenMainM.png</icon>
+			<link>index.php?page=guthabenCouponList</link>
+			<parent>cp.acp.menu.link.vhostcontainer</parent>
+			<showorder>1</showorder>
+		</acpmenuitem>
+
+		<acpmenuitem name="wcf.acp.menu.link.content.guthaben.couponadd">
+			<link>index.php?form=guthabenCouponAdd</link>
+			<parent>cp.acp.menu.link.vhostcontainer</parent>
+			<showorder>2</showorder>
+		</acpmenuitem>
+	</import>
+</data>

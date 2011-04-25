@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<!DOCTYPE import SYSTEM "DTD/import.dtd">
+<data>
+	<import>
+		<pagelocation name="wcf.usersOnline.location.guthaben.coupon">
+			<pattern><![CDATA[index\.php\?form=guthabenCoupon]]></pattern>
+		</pagelocation>
+	</import>
+</data>
