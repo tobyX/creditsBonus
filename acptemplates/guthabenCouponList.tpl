@@ -9,14 +9,14 @@
 </div>
 
 {if $deleted}
-	<p class="success">{lang}wcf.acp.guthaben.coupon.list.deleted.success{/lang}</p>
+	<p class="success">{lang}wcf.acp.guthaben.coupon.deleted.success{/lang}</p>
 {/if}
 
 <div class="contentHeader">
 	{pages print=true assign=pagesLinks link="index.php?page=guthabenCouponList&pageNo=%d&sortField=$sortField&sortOrder=$sortOrder&packageID="|concat:PACKAGE_ID:SID_ARG_2ND_NOT_ENCODED}
 	<div class="largeButtons">
 		<ul>
-			<li><a href="index.php?form=vhostContainerAdd&amp;packageID={@PACKAGE_ID}{@SID_ARG_2ND}" title="{lang}wcf.acp.guthaben.coupon.add{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/guthabenMainM.png" alt="" /> <span>{lang}wcf.acp.guthaben.coupon.add{/lang}</span></a></li>{/if}
+			<li><a href="index.php?form=guthabenCouponAdd&amp;packageID={@PACKAGE_ID}{@SID_ARG_2ND}" title="{lang}wcf.acp.guthaben.coupon.add{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/guthabenMainM.png" alt="" /> <span>{lang}wcf.acp.guthaben.coupon.add{/lang}</span></a></li>
 			{if $additionalLargeButtons|isset}{@$additionalLargeButtons}{/if}
 		</ul>
 	</div>
@@ -44,14 +44,14 @@
 				<tr class="{cycle values="container-1,container-2"}">
 					<td class="columnIcon">
 						<a href="index.php?form=guthabenCouponEdit&amp;couponID={$coupon->couponID}{@SID_ARG_2ND}"><img src="{@RELATIVE_WCF_DIR}icon/editS.png" alt="" title="{lang}wcf.acp.guthaben.coupon.edit{/lang}" /></a>
-						<a onclick="return confirm('{lang}wcf.acp.guthaben.coupon.delete.sure{/lang}')" href="index.php?action=vhostContainerDelete&amp;vhostContainerID={@$vhostContainer->vhostContainerID}{@SID_ARG_2ND}"><img src="{@RELATIVE_WCF_DIR}icon/deleteS.png" alt="" title="{lang}wcf.acp.guthaben.coupon.delete{/lang}" /></a>
+						<a onclick="return confirm('{lang}wcf.acp.guthaben.coupon.delete.sure{/lang}')" href="index.php?action=guthabenCouponDelete&amp;couponID={@$coupon->couponID}{@SID_ARG_2ND}"><img src="{@RELATIVE_WCF_DIR}icon/deleteS.png" alt="" title="{lang}wcf.acp.guthaben.coupon.delete{/lang}" /></a>
 
-						{if $additionalButtons[$vhostContainer->vhostContainerID]|isset}{@$additionalButtons[$vhostContainer->vhostContainerID]}{/if}
+						{if $additionalButtons[$coupon->couponID]|isset}{@$additionalButtons[$coupon->couponID]}{/if}
 					</td>
-					<td class="columncouponID columnID">{@$coupon->vhostContainerID}</td>
+					<td class="columncouponID columnID">{@$coupon->couponID}</td>
 					<td class="columncouponcode columnText"><a title="{lang}wcf.acp.guthaben.coupon.edit{/lang}" href="index.php?form=guthabenCouponEdit&amp;couponID={@$coupon->couponID}{@SID_ARG_2ND}">{$coupon->couponcode}</a></td>
 					<td class="columnusername columnText">{$coupon->username}</td>
-					<td class="columncashTime columnText">{if $coupon->cashTime}{@$coupon->cashTime|time}</td>
+					<td class="columncashTime columnText">{if $coupon->cashTime}{@$coupon->cashTime|time}{/if}</td>
 					<td class="columnguthaben columnText">{$coupon->guthaben}</td>
 
 					{if $additionalColumns[$coupon->couponID]|isset}{@$additionalColumns[$coupon->couponID]}{/if}

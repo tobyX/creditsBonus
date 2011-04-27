@@ -9,13 +9,13 @@
 		<acpmenuitem name="wcf.acp.menu.link.content.guthaben.couponlist">
 			<icon>icon/guthabenMainM.png</icon>
 			<link>index.php?page=guthabenCouponList</link>
-			<parent>cp.acp.menu.link.vhostcontainer</parent>
+			<parent>wcf.acp.menu.link.content.guthaben</parent>
 			<showorder>1</showorder>
 		</acpmenuitem>
 
 		<acpmenuitem name="wcf.acp.menu.link.content.guthaben.couponadd">
 			<link>index.php?form=guthabenCouponAdd</link>
-			<parent>cp.acp.menu.link.vhostcontainer</parent>
+			<parent>wcf.acp.menu.link.content.guthaben</parent>
 			<showorder>2</showorder>
 		</acpmenuitem>
 	</import>

@@ -14,8 +14,6 @@ require_once (WCF_DIR . 'lib/acp/form/GuthabenCouponAddForm.class.php');
  */
 class GuthabenCouponEditForm extends GuthabenCouponAddForm
 {
-	public $permission = 'admin.cp.canEditVhostContainer';
-
 	/**
 	 * @see Page::readParameters()
 	 */
@@ -26,8 +24,6 @@ class GuthabenCouponEditForm extends GuthabenCouponAddForm
 		if (isset($_REQUEST['couponID']))
 		{
 			$this->couponID = intval($_REQUEST['couponID']);
-
-			require_once (WCF_DIR . 'lib/data/guthaben/GuthabenCouponEditor.class.php');
 
 			$this->coupon = new GuthabenCouponEditor($this->couponID);
 
@@ -50,6 +46,16 @@ class GuthabenCouponEditForm extends GuthabenCouponAddForm
 		}
 
 		parent :: readData();
+	}
+
+	/**
+	 * checks if couponcode is unique
+	 */
+	public function isUniqueCode()
+	{
+		$gc = new GuthabenCoupon(null, $this->couponcode);
+
+		return ($gc->couponcode != $this->couponcode || $gc->couponID == $this->couponID);
 	}
 
 	/**

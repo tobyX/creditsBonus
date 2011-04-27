@@ -27,7 +27,7 @@ class GuthabenCouponForm extends AbstractForm
 		parent :: readFormParameters();
 
 		if (isset ($_POST['couponcode']))
-			$this->couponcode = abs(intval($_POST['couponcode']));
+			$this->couponcode = StringUtil :: trim($_POST['couponcode']);
 	}
 
 	/**
@@ -40,7 +40,7 @@ class GuthabenCouponForm extends AbstractForm
 		if (empty($this->couponcode))
 			throw new UserInputException('couponcode', 'empty');
 
-		$this->coupon = new GuthabenCouponEditor($this->couponcode);
+		$this->coupon = new GuthabenCouponEditor(null, $this->couponcode);
 
 		if ($this->coupon->couponcode != $this->couponcode)
 			throw new UserInputException('couponcode', 'invalid');
@@ -70,6 +70,17 @@ class GuthabenCouponForm extends AbstractForm
 			'success' => true,
 			'cash' => $this->coupon->guthaben,
 		));
+	}
+
+	/**
+	 * @see Page::assignVariables()
+	 */
+	public function assignVariables()
+	{
+		parent :: assignVariables();
+
+		// assign default variables
+		WCF::getTPL()->assign('couponcode', $this->couponcode);
 	}
 
 	/**

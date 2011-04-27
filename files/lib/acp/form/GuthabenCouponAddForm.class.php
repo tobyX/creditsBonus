@@ -1,9 +1,8 @@
 <?php
 require_once (WCF_DIR . 'lib/acp/form/ACPForm.class.php');
+require_once (WCF_DIR . 'lib/data/guthaben/GuthabenCouponEditor.class.php');
 
 /**
- * Shows the vhostContainer add form.
- *
  * @author		Tobias Friebel
  * @copyright	2011 Tobias Friebel
  * @license		CC Namensnennung-Keine kommerzielle Nutzung-Keine Bearbeitung http://creativecommons.org/licenses/by-nc-nd/2.0/de/
@@ -15,8 +14,7 @@ require_once (WCF_DIR . 'lib/acp/form/ACPForm.class.php');
 class GuthabenCouponAddForm extends ACPForm
 {
 	public $templateName = 'guthabenCouponAdd';
-	public $activeMenuItem = 'cp.acp.menu.link.vhostcontainer.add';
-	public $permission = 'admin.cp.canAddVhostContainer';
+	public $activeMenuItem = 'wcf.acp.menu.link.content.guthaben.add';
 
 	public $coupon;
 
@@ -77,7 +75,6 @@ class GuthabenCouponAddForm extends ACPForm
 		parent :: save();
 
 		// create
-		require_once (WCF_DIR . 'lib/data/guthaben/GuthabenCouponEditor.class.php');
 		$this->coupon = GuthabenCouponEditor :: create($this->couponcode, $this->guthaben);
 		$this->saved();
 
@@ -103,18 +100,6 @@ class GuthabenCouponAddForm extends ACPForm
 			'guthaben' => $this->guthaben,
 			'action' => 'add',
 		));
-	}
-
-	/**
-	 * @see Page::show()
-	 */
-	public function show()
-	{
-		// check permission
-		WCF :: getUser()->checkPermission($this->permission);
-
-		// show form
-		parent :: show();
 	}
 }
 ?>

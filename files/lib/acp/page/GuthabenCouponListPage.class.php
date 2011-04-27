@@ -18,7 +18,7 @@ class GuthabenCouponListPage extends SortablePage
 	public $itemsPerPage = 50;
 	public $templateName = 'guthabenCouponList';
 
-	public $defaultSortField = 'chashTime';
+	public $defaultSortField = 'cashTime';
 	public $defaultSortOrder = 'DESC';
 
 	public $deleted = null;
@@ -67,7 +67,7 @@ class GuthabenCouponListPage extends SortablePage
 		{
 			case 'couponcode':
 			case 'username':
-			case 'chashTime':
+			case 'cashTime':
 			case 'guthaben':
 			case 'couponID':
 			break;

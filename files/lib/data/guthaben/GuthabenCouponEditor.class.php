@@ -72,7 +72,7 @@ class GuthabenCouponEditor extends GuthabenCoupon
 		$updateSQL = '';
 		if (!empty($couponcode))
 		{
-			$updateSQL .= "couponname = '" . escapeString($couponcode) . "'";
+			$updateSQL .= "couponcode = '" . escapeString($couponcode) . "'";
 			$this->couponcode = $couponcode;
 		}
 
@@ -101,7 +101,7 @@ class GuthabenCouponEditor extends GuthabenCoupon
 	 *
 	 * @return bool
 	 */
-	protected function cashCoupon($user)
+	public function cashCoupon($user)
 	{
 		if ($this->userID != 0)
 			return false;

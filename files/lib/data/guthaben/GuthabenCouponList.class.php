@@ -1,6 +1,6 @@
 <?php
 require_once (WCF_DIR . 'lib/data/DatabaseObjectList.class.php');
-require_once (WcF_DIR . 'lib/data/guthaben/GuthabenCoupon.class.php');
+require_once (WCF_DIR . 'lib/data/guthaben/GuthabenCoupon.class.php');
 
 /**
  * @author		Tobias Friebel

@@ -71,7 +71,7 @@
 				//]]></script>
 
 				{if $additionalFields|isset}{@$additionalFields}{/if}
-			<fieldset>
+			</fieldset>
 
 			{if $additionalFieldSets|isset}{@$additionalFieldSets}{/if}
 
