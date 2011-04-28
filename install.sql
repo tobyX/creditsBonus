@@ -5,6 +5,7 @@ CREATE TABLE wcf1_guthaben_coupon
 	userID int(10) unsigned NULL,
 	guthaben int(11) NOT NULL DEFAULT 0,
 	cashTime int(10) unsigned NOT NULL DEFAULT 0,
+	promotion tinyint(1) unsigned NOT NULL DEFAULT 0,
 	PRIMARY KEY (couponID),
 	KEY userID (userID),
 	UNIQUE KEY couponcode (couponcode)

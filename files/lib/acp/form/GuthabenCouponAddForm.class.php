@@ -22,6 +22,7 @@ class GuthabenCouponAddForm extends ACPForm
 
 	public $couponcode = '';
 	public $guthaben = 0;
+	public $promotion = 0;
 
 	/**
 	 * @see Form::readFormParameters()
@@ -33,10 +34,33 @@ class GuthabenCouponAddForm extends ACPForm
 		if (isset($_POST['couponcode']) && !empty($_POST['couponcode']))
 			$this->couponcode = StringUtil :: trim($_POST['couponcode']);
 		else
-			$this->couponcode = UserRegistrationUtil :: getNewPassword();
+			$this->couponcode = $this->getRandomCode();
 
 		if (isset($_POST['guthaben']))
 			$this->guthaben = abs(intval($_POST['guthaben']));
+
+		if (isset($_POST['promotion']))
+			$this->promotion = abs(intval($_POST['promotion']));
+	}
+
+	/**
+	 * Generates a random code
+	 *
+	 * @return	string		new couponcode
+	 */
+	public function getRandomCode()
+	{
+		static $availableCharacters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+
+		$length = MathUtil::getRandomValue(6, 12);
+
+		$couponcode = '';
+		for ($i = 0; $i < $length; $i++)
+		{
+			$couponcode .= $availableCharacters{MathUtil::getRandomValue(0, strlen($availableCharacters) - 1)};
+		}
+
+		return $couponcode;
 	}
 
 	/**
@@ -75,7 +99,7 @@ class GuthabenCouponAddForm extends ACPForm
 		parent :: save();
 
 		// create
-		$this->coupon = GuthabenCouponEditor :: create($this->couponcode, $this->guthaben);
+		$this->coupon = GuthabenCouponEditor :: create($this->couponcode, $this->guthaben, $this->promotion);
 		$this->saved();
 
 		// show empty add form
@@ -86,6 +110,7 @@ class GuthabenCouponAddForm extends ACPForm
 		// reset values
 		$this->couponcode = '';
 		$this->guthaben = 0;
+		$this->promotion = 0;
 	}
 
 	/**
@@ -98,6 +123,7 @@ class GuthabenCouponAddForm extends ACPForm
 		WCF :: getTPL()->assign(array (
 			'couponcode' => $this->couponcode,
 			'guthaben' => $this->guthaben,
+			'promotion' => $this->promotion,
 			'action' => 'add',
 		));
 	}

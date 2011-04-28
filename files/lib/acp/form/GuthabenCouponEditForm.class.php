@@ -43,6 +43,7 @@ class GuthabenCouponEditForm extends GuthabenCouponAddForm
 		{
 			$this->couponcode = $this->coupon->couponcode;
 			$this->guthaben = $this->coupon->guthaben;
+			$this->promotion = $this->coupon->promotion;
 		}
 
 		parent :: readData();
@@ -79,7 +80,7 @@ class GuthabenCouponEditForm extends GuthabenCouponAddForm
 		ACPForm :: save();
 
 		// save vhostContainer
-		$this->coupon->update($this->couponcode, $this->guthaben);
+		$this->coupon->update($this->couponcode, $this->guthaben, $this->promotion);
 
 		$this->saved();
 

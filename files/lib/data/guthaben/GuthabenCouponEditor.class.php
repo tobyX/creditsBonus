@@ -21,13 +21,14 @@ class GuthabenCouponEditor extends GuthabenCoupon
 	 *
 	 * @param 	string 		$couponcode
 	 * @param	integer		$guthaben
+	 * @param	bool		$promotion
 	 *
 	 * @return 	GuthabenCouponEditor
 	 */
-	public static function create($couponcode, $guthaben)
+	public static function create($couponcode, $guthaben, $promotion)
 	{
 		// insert main data
-		$couponID = self :: insert($couponcode, $guthaben);
+		$couponID = self :: insert($couponcode, $guthaben, $promotion);
 
 		return new GuthabenCouponEditor($couponID);
 	}
@@ -37,15 +38,17 @@ class GuthabenCouponEditor extends GuthabenCoupon
 	 *
 	 * @param 	string 		$couponcode
 	 * @param	integer		$guthaben
+	 * @param	bool		$promotion
 	 *
 	 * @return 	integer		new couponID
 	 */
-	public static function insert($couponcode, $guthaben)
+	public static function insert($couponcode, $guthaben, $promotion)
 	{
 		$sql = "INSERT INTO	wcf" . WCF_N . "_guthaben_coupon
-						(couponcode, guthaben)
+						(couponcode, guthaben, promotion)
 				VALUES	('" . escapeString($couponcode) . "',
-						 " . intval($guthaben) . ")";
+						 " . intval($guthaben) . ",
+						 " . intval($promotion) . ")";
 		WCF :: getDB()->sendQuery($sql);
 		return WCF :: getDB()->getInsertID();
 	}
@@ -54,20 +57,23 @@ class GuthabenCouponEditor extends GuthabenCoupon
 	 * Updates this coupon.
 	 *
 	 * @param 	string 		$couponcode
-	 * @param	int			$guthaben
+	 * @param	integer		$guthaben
+	 * @param	bool		$promotion
+	 *
 	 */
-	public function update($couponcode = '', $guthaben = 0)
+	public function update($couponcode = '', $guthaben = 0, $promotion = 0)
 	{
-		$this->updateCoupon($couponcode, $guthaben);
+		$this->updateCoupon($couponcode, $guthaben, $promotion);
 	}
 
 	/**
 	 * Updates the static data of this coupon.
 	 *
 	 * @param 	string 		$couponcode
-	 * @param	int			$guthaben
+	 * @param	integer		$guthaben
+	 * @param	bool		$promotion
 	 */
-	protected function updateCoupon($couponcode = '', $guthaben = 0)
+	protected function updateCoupon($couponcode = '', $guthaben = 0, $promotion = 0)
 	{
 		$updateSQL = '';
 		if (!empty($couponcode))
@@ -82,6 +88,14 @@ class GuthabenCouponEditor extends GuthabenCoupon
 				$updateSQL .= ',';
 			$updateSQL .= "guthaben = '" . intval($guthaben) . "'";
 			$this->guthaben = $guthaben;
+		}
+
+		if ($promotion != 0)
+		{
+			if (!empty($updateSQL))
+				$updateSQL .= ',';
+			$updateSQL .= "promotion = '" . intval($promotion) . "'";
+			$this->promotion = $promotion;
 		}
 
 		if (!empty($updateSQL))
@@ -103,7 +117,7 @@ class GuthabenCouponEditor extends GuthabenCoupon
 	 */
 	public function cashCoupon($user)
 	{
-		if ($this->userID != 0)
+		if ($this->userID != 0 && $this->promotion == 0)
 			return false;
 
 		$this->userID = $user->userID;

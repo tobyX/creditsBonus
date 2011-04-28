@@ -70,6 +70,12 @@
 					inlineHelp.register('guthaben');
 				//]]></script>
 
+				<div class="formElement">
+					<div class="formField">
+						<label id="promotion"><input type="checkbox" name="promotion" value="1" {if $promotion}checked="checked" {/if}/> {lang}wcf.acp.guthaben.coupon.promotion{/lang}</label>
+					</div>
+				</div>
+
 				{if $additionalFields|isset}{@$additionalFields}{/if}
 			</fieldset>
 

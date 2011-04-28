@@ -28,6 +28,7 @@
 		<item name="wcf.acp.guthaben.coupon.delete"><![CDATA[Gutschein löschen]]></item>
 		<item name="wcf.acp.guthaben.coupon.delete.sure"><![CDATA[Wollen Sie diesen Gutschein wirklich löschen?]]></item>
 		<item name="wcf.acp.guthaben.coupon.deleted.success"><![CDATA[Gutschein erfolgreich gelöscht!]]></item>
+		<item name="wcf.acp.guthaben.coupon.promotion"><![CDATA[Dieser Gutschein kann mehrfach eingelöst werden]]></item>
 	</category>
 	
 	<category name="wcf.acp.menu">
