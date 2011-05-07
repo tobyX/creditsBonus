@@ -18,7 +18,7 @@ class GuthabenCouponListPage extends SortablePage
 	public $itemsPerPage = 50;
 	public $templateName = 'guthabenCouponList';
 
-	public $defaultSortField = 'cashTime';
+	public $defaultSortField = 'lastCashTime';
 	public $defaultSortOrder = 'DESC';
 
 	public $deleted = null;
@@ -49,10 +49,11 @@ class GuthabenCouponListPage extends SortablePage
 		$this->coupons->sqlOffset = ($this->pageNo - 1) * $this->itemsPerPage;
 		$this->coupons->sqlLimit = $this->itemsPerPage;
 
-		if ($this->sortField == 'username')
-			$this->coupons->sqlOrderBy = 'user.' . $this->sortField . ' ' . $this->sortOrder;
+		if ($this->sortField == 'countUserIDs')
+			$this->coupons->sqlOrderBy = $this->sortField . ' ' . $this->sortOrder;
 		else
 			$this->coupons->sqlOrderBy = 'coupon.' . $this->sortField . ' ' . $this->sortOrder;
+
 		$this->coupons->readObjects();
 	}
 
@@ -66,10 +67,10 @@ class GuthabenCouponListPage extends SortablePage
 		switch ($this->sortField)
 		{
 			case 'couponcode':
-			case 'username':
-			case 'cashTime':
+			case 'lastCashTime':
 			case 'guthaben':
 			case 'couponID':
+			case 'countUserIDs':
 			break;
 			default:
 				$this->sortField = $this->defaultSortField;

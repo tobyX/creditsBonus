@@ -33,11 +33,13 @@ class GuthabenCouponList extends DatabaseObjectList
 	public function readObjects()
 	{
 		$sql = "SELECT		" . (!empty($this->sqlSelects) ? $this->sqlSelects . ',' : '') . "
-							coupon.*, user.username
+							coupon.*,
+							COUNT(coupon2user.userID) AS countUserIDs
 				FROM		wcf" . WCF_N . "_guthaben_coupon coupon
-				LEFT JOIN 	wcf" . WCF_N . "_user user ON (user.userID = coupon.userID)
+				LEFT JOIN	wcf" . WCF_N . "_guthaben_coupon_to_user coupon2user ON (coupon.couponID = coupon2user.couponID)
 				" . $this->sqlJoins . "
 				" . (!empty($this->sqlConditions) ? "WHERE " . $this->sqlConditions : '') . "
+				GROUP BY coupon.couponID
 				" . (!empty($this->sqlOrderBy) ? "ORDER BY " . $this->sqlOrderBy : '');
 
 		$result = WCF :: getDB()->sendQuery($sql, $this->sqlLimit, $this->sqlOffset);

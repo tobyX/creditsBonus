@@ -45,11 +45,8 @@ class GuthabenCouponForm extends AbstractForm
 		if ($this->coupon->couponcode != $this->couponcode)
 			throw new UserInputException('couponcode', 'invalid');
 
-		if ($this->coupon->userID != 0 && $this->coupon->promotion == 0)
-			throw new UserInputException('couponcode', 'alreadycashed');
-
-		$cashedCoupons = WCF :: getSession()->getVar('cashedCoupons');
-		if ($this->coupon->promotion == 1 && !is_null($cashedCoupons) && in_array($this->coupon->couponID, $cashedCoupons))
+		if (in_array(WCF :: getUser()->userID, $this->coupon->userIDs) ||
+			($this->coupon->promotion == 0 && count($this->coupon->userIDs) > 0))
 			throw new UserInputException('couponcode', 'alreadycashed');
 	}
 
@@ -68,23 +65,11 @@ class GuthabenCouponForm extends AbstractForm
 
 		$this->coupon->cashCoupon(WCF :: getUser());
 
-		if ($this->coupon->promotion)
-		{
-			$cashesCoupons = WCF :: getSession()->getVar('cashedCoupons');
-
-			if (is_null($cashesCoupons))
-				$cashesCoupons = array();
-
-			$cashesCoupons[] = $this->coupon->couponID;
-
-			WCF :: getSession()->register('cashedCoupons', $cashesCoupons);
-		}
-
 		$this->saved();
 
 		WCF :: getTPL()->assign(array (
 			'success' => true,
-			'cash' => $this->coupon->guthaben,
+			'cash' => Guthaben :: format($this->coupon->guthaben),
 		));
 	}
 
@@ -96,7 +81,7 @@ class GuthabenCouponForm extends AbstractForm
 		parent :: assignVariables();
 
 		// assign default variables
-		WCF::getTPL()->assign('couponcode', $this->couponcode);
+		WCF :: getTPL()->assign('couponcode', $this->couponcode);
 	}
 
 	/**
@@ -110,9 +95,9 @@ class GuthabenCouponForm extends AbstractForm
 		}
 
 		// set active header menu item
-		PageMenu::setActiveMenuItem('wcf.header.menu.guthabenmain');
+		PageMenu :: setActiveMenuItem('wcf.header.menu.guthabenmain');
 
-		parent::show();
+		parent :: show();
 	}
 }
 ?>

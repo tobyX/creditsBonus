@@ -68,6 +68,8 @@ class GuthabenCouponEditForm extends GuthabenCouponAddForm
 
 		WCF :: getTPL()->assign(array (
 			'couponID' => $this->couponID,
+			'users' => $this->coupon->usernames,
+			'cashTimes' => $this->coupon->cashTimes,
 			'action' => 'edit',
 		));
 	}

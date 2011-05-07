@@ -7,8 +7,8 @@
 		<isUnique>1</isUnique>
 		<packageDescription>Gutscheine fürs Guthabensystem</packageDescription>
 		<standalone>0</standalone>
-		<version>1.1.0</version>
-		<date>2011-04-28</date>
+		<version>2.0.0</version>
+		<date>2011-05-07</date>
 		<plugin>com.toby.wcf.guthaben</plugin>
 	</packageInformation>
 
@@ -27,6 +27,18 @@
 		<languages languagecode="de-informal">de-informal.utf-8.xml</languages>
 		<files>files.tar</files>
 		<sql>install.sql</sql>
+		<templates>templates.tar</templates>
+		<pagelocation>pagelocation.xml</pagelocation>
+		<groupoptions>groupoptions.xml</groupoptions>
+		<guthabenmainpage>mainpagemenu.xml</guthabenmainpage>
+		<acptemplates>acptemplates.tar</acptemplates>
+		<acpmenu>acpmenu.xml</acpmenu>
+	</instructions>
+	
+	<instructions type="update" fromversion="2.0.*">
+		<languages languagecode="de">de.utf-8.xml</languages>
+		<languages languagecode="de-informal">de-informal.utf-8.xml</languages>
+		<files>files.tar</files>
 		<templates>templates.tar</templates>
 		<pagelocation>pagelocation.xml</pagelocation>
 		<groupoptions>groupoptions.xml</groupoptions>

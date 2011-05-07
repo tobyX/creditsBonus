@@ -18,6 +18,7 @@
 		<item name="wcf.acp.guthaben.coupon.couponcode"><![CDATA[Gutscheincode]]></item>
 		<item name="wcf.acp.guthaben.coupon.couponcode.description"><![CDATA[Dieser Code muss einmalig sein. Wird keiner angegeben, erzeugt das System einen zufälligen.]]></item>
 		<item name="wcf.acp.guthaben.coupon.username"><![CDATA[Einlösender Benutzer]]></item>
+		<item name="wcf.acp.guthaben.coupon.usernames"><![CDATA[Einlösende Benutzer]]></item>
 		<item name="wcf.acp.guthaben.coupon.cashTime"><![CDATA[Einlösdatum]]></item>
 		<item name="wcf.acp.guthaben.coupon.guthaben"><![CDATA[Gutschrift]]></item>
 		<item name="wcf.acp.guthaben.coupon.guthaben.description"><![CDATA[Dieser Betrag wird dem einlösenden Benutzer gutgeschrieben.]]></item>
@@ -29,6 +30,7 @@
 		<item name="wcf.acp.guthaben.coupon.delete.sure"><![CDATA[Wollen Sie diesen Gutschein wirklich löschen?]]></item>
 		<item name="wcf.acp.guthaben.coupon.deleted.success"><![CDATA[Gutschein erfolgreich gelöscht!]]></item>
 		<item name="wcf.acp.guthaben.coupon.promotion"><![CDATA[Dieser Gutschein kann mehrfach eingelöst werden]]></item>
+		<item name="wcf.acp.guthaben.coupon.notunique"><![CDATA[Dieser Code wird bereits verwendet!]]></item>
 	</category>
 	
 	<category name="wcf.acp.menu">
@@ -49,7 +51,7 @@
 		<item name="wcf.guthaben.coupon.couponcode"><![CDATA[Gutscheincode]]></item>
 		<item name="wcf.guthaben.coupon.invalid"><![CDATA[Dieser Code ist ungültig!]]></item>
 		<item name="wcf.guthaben.coupon.alreadycashed"><![CDATA[Dieser Code wurde bereits eingelöst!]]></item>
-		<item name="wcf.guthaben.coupon.cashed"><![CDATA[Code erfolgreich eingelöst!]]></item>
+		<item name="wcf.guthaben.coupon.cashed"><![CDATA[Code erfolgreich eingelöst! {@$cash} wurden gutgeschrieben!]]></item>
 	</category>
 
 	<category name="wcf.usersOnline">

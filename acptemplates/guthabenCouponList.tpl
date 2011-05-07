@@ -31,9 +31,9 @@
 			<thead>
 				<tr class="tableHead">
 					<th class="columncouponID{if $sortField == 'couponID'} active{/if}" colspan="2"><div><a href="index.php?page=guthabenCouponList&amp;pageNo={@$pageNo}&amp;sortField=couponID&amp;sortOrder={if $sortField == 'couponID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{@SID_ARG_2ND}">{lang}wcf.acp.guthaben.coupon.couponID{/lang}{if $sortField == 'couponID'} <img src="{@RELATIVE_WCF_DIR}icon/sort{@$sortOrder}S.png" alt="" />{/if}</a></div></th>
-					<th class="columncouponcode{if $sortField == 'couponcode'} active{/if}"><div><a href="index.php?page=guthabenCouponList&amp;pageNo={@$pageNo}&amp;sortField=cashcode&amp;sortOrder={if $sortField == 'cashcode' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{@SID_ARG_2ND}">{lang}wcf.acp.guthaben.coupon.couponcode{/lang}{if $sortField == 'couponcode'} <img src="{@RELATIVE_WCF_DIR}icon/sort{@$sortOrder}S.png" alt="" />{/if}</a></div></th>
-					<th class="columnusername{if $sortField == 'username'} active{/if}"><div><a href="index.php?page=guthabenCouponList&amp;pageNo={@$pageNo}&amp;sortField=username&amp;sortOrder={if $sortField == 'username' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{@SID_ARG_2ND}">{lang}wcf.acp.guthaben.coupon.username{/lang}{if $sortField == 'username'} <img src="{@RELATIVE_WCF_DIR}icon/sort{@$sortOrder}S.png" alt="" />{/if}</a></div></th>
-					<th class="columncashTime{if $sortField == 'cashTime'} active{/if}"><div><a href="index.php?page=guthabenCouponList&amp;pageNo={@$pageNo}&amp;sortField=cashTime&amp;sortOrder={if $sortField == 'cashTime' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{@SID_ARG_2ND}">{lang}wcf.acp.guthaben.coupon.cashTime{/lang}{if $sortField == 'cashTime'} <img src="{@RELATIVE_WCF_DIR}icon/sort{@$sortOrder}S.png" alt="" />{/if}</a></div></th>
+					<th class="columncouponcode{if $sortField == 'couponcode'} active{/if}"><div><a href="index.php?page=guthabenCouponList&amp;pageNo={@$pageNo}&amp;sortField=couponcode&amp;sortOrder={if $sortField == 'couponcode' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{@SID_ARG_2ND}">{lang}wcf.acp.guthaben.coupon.couponcode{/lang}{if $sortField == 'couponcode'} <img src="{@RELATIVE_WCF_DIR}icon/sort{@$sortOrder}S.png" alt="" />{/if}</a></div></th>
+					<th class="columnusernames{if $sortField == 'countUserIDs'} active{/if}"><div><a href="index.php?page=guthabenCouponList&amp;pageNo={@$pageNo}&amp;sortField=countUserIDs&amp;sortOrder={if $sortField == 'countUserIDs' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{@SID_ARG_2ND}">{lang}wcf.acp.guthaben.coupon.usernames{/lang}{if $sortField == 'countUserIDs'} <img src="{@RELATIVE_WCF_DIR}icon/sort{@$sortOrder}S.png" alt="" />{/if}</a></div></th>
+					<th class="columnlastCashTime{if $sortField == 'lastCashTime'} active{/if}"><div><a href="index.php?page=guthabenCouponList&amp;pageNo={@$pageNo}&amp;sortField=lastCashTime&amp;sortOrder={if $sortField == 'lastCashTime' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{@SID_ARG_2ND}">{lang}wcf.acp.guthaben.coupon.cashTime{/lang}{if $sortField == 'lastCashTime'} <img src="{@RELATIVE_WCF_DIR}icon/sort{@$sortOrder}S.png" alt="" />{/if}</a></div></th>
 					<th class="columnguthaben{if $sortField == 'guthaben'} active{/if}"><div><a href="index.php?page=guthabenCouponList&amp;pageNo={@$pageNo}&amp;sortField=guthaben&amp;sortOrder={if $sortField == 'guthaben' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{@SID_ARG_2ND}">{lang}wcf.acp.guthaben.coupon.guthaben{/lang}{if $sortField == 'guthaben'} <img src="{@RELATIVE_WCF_DIR}icon/sort{@$sortOrder}S.png" alt="" />{/if}</a></div></th>
 
 					{if $additionalColumns|isset}{@$additionalColumns}{/if}
@@ -50,8 +50,8 @@
 					</td>
 					<td class="columncouponID columnID">{@$coupon->couponID}</td>
 					<td class="columncouponcode columnText"><a title="{lang}wcf.acp.guthaben.coupon.edit{/lang}" href="index.php?form=guthabenCouponEdit&amp;couponID={@$coupon->couponID}{@SID_ARG_2ND}">{$coupon->couponcode}</a></td>
-					<td class="columnusername columnText">{$coupon->username}</td>
-					<td class="columncashTime columnText">{if $coupon->cashTime}{@$coupon->cashTime|time}{/if}</td>
+					<td class="columnusername columnText">{$coupon->countUserIDs}</td>
+					<td class="columnlastCashTime columnText">{if $coupon->lastCashTime}{@$coupon->lastCashTime|time}{/if}</td>
 					<td class="columnguthaben columnText">{$coupon->guthaben}</td>
 
 					{if $additionalColumns[$coupon->couponID]|isset}{@$additionalColumns[$coupon->couponID]}{/if}

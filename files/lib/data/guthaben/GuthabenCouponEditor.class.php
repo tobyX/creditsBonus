@@ -117,16 +117,20 @@ class GuthabenCouponEditor extends GuthabenCoupon
 	 */
 	public function cashCoupon($user)
 	{
-		if ($this->userID != 0 && $this->promotion == 0)
+		if (in_array($user->userID, $this->userIDs) || ($this->promotion == 0 && count($this->userIDs) > 0))
 			return false;
 
-		$this->userID = $user->userID;
-		$this->cashTime = TIME_NOW;
+		$this->userIDs[] = $user->userID;
+		$this->lastCashTime = TIME_NOW;
+
+		$sql = "INSERT INTO	wcf" . WCF_N . "_guthaben_coupon_to_user
+						(couponID, userID, cashTime)
+				VALUES 	(" . intval($this->couponID) . ", " . intval($user->userID) . ", " . TIME_NOW . ")";
+		WCF :: getDB()->sendQuery($sql);
 
 		$sql = "UPDATE	wcf" . WCF_N . "_guthaben_coupon
-				SET	userID = " . intval($user->userID) . ",
-					cashTime = " . TIME_NOW . "
-				WHERE 	couponID = " . $this->couponID;
+				SET		lastCashTime = " . TIME_NOW . "
+				WHERE	couponID = " . intval($this->couponID);
 		WCF :: getDB()->sendQuery($sql);
 
 		Guthaben :: add($this->guthaben, 'wcf.guthaben.log.coupon', $this->couponcode, '', $user);
@@ -139,8 +143,11 @@ class GuthabenCouponEditor extends GuthabenCoupon
 	 */
 	public function delete()
 	{
-		// delete domain from domain table
 		$sql = "DELETE 	FROM wcf" . WCF_N . "_guthaben_coupon
+				WHERE 	couponID = " . $this->couponID;
+		WCF :: getDB()->sendQuery($sql);
+
+		$sql = "DELETE 	FROM wcf" . WCF_N . "_guthaben_coupon_to_user
 				WHERE 	couponID = " . $this->couponID;
 		WCF :: getDB()->sendQuery($sql);
 	}

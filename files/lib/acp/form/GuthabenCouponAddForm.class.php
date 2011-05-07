@@ -124,6 +124,7 @@ class GuthabenCouponAddForm extends ACPForm
 			'couponcode' => $this->couponcode,
 			'guthaben' => $this->guthaben,
 			'promotion' => $this->promotion,
+			'users' => array(),
 			'action' => 'add',
 		));
 	}

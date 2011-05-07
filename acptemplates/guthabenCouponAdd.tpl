@@ -80,7 +80,30 @@
 			</fieldset>
 
 			{if $additionalFieldSets|isset}{@$additionalFieldSets}{/if}
+		</div>
 
+		<div class="container-2">
+			<div class="border titleBarPanel">
+				<div class="containerHead"><h3>{lang}wcf.acp.guthaben.coupon.usernames{/lang}</h3></div>
+			</div>
+			<div class="border borderMarginRemove">
+				<table class="tableList">
+					<thead>
+						<tr class="tableHead">
+							<th class="columnusername"><div>{lang}wcf.acp.guthaben.coupon.username{/lang}</div></th>
+							<th class="columncashTime"><div>{lang}wcf.acp.guthaben.coupon.cashTime{/lang}</div></th>
+						</tr>
+					</thead>
+					<tbody>
+					{foreach from=$users key=c item=username}
+						<tr class="{cycle values="container-1,container-2"}">
+							<td class="columnusername columnText">{@$username}</td>
+							<td class="columnlastCashTime columnText">{@$cashTimes.$c|time}</td>
+						</tr>
+					{/foreach}
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 

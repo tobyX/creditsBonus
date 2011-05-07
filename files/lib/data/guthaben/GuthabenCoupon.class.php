@@ -16,6 +16,10 @@ if (!defined('NO_IMPORTS'))
  */
 class GuthabenCoupon extends DatabaseObject
 {
+	public $usernames = array();
+	public $userIDs = array();
+	public $cashTimes = array();
+
 	/**
 	 * Get coupon for given ID
 	 *
@@ -28,23 +32,62 @@ class GuthabenCoupon extends DatabaseObject
 		$where = '';
 		if ($couponID !== null)
 		{
-			$where = "couponID = " . intval($couponID);
+			$where = "coupon.couponID = " . intval($couponID);
 		}
 		else if ($couponcode !== null)
 		{
-			$where = "couponcode = '" . escapeString($couponcode) . "'";
+			$where = "coupon.couponcode = '" . escapeString($couponcode) . "'";
 		}
 
 		if (!empty($where))
 		{
-			$sql = "SELECT 		*
-					FROM 		wcf" . WCF_N . "_guthaben_coupon
-					WHERE 		" . $where;
+			$sql = "SELECT 		coupon.*,
+						GROUP_CONCAT(DISTINCT coupon2user.userID ORDER BY coupon2user.userID ASC SEPARATOR ',') AS userIDs,
+						GROUP_CONCAT(DISTINCT coupon2user.cashTime ORDER BY coupon2user.userID ASC SEPARATOR ',') AS cashTimes
+					FROM 		wcf" . WCF_N . "_guthaben_coupon coupon
+					LEFT JOIN	wcf" . WCF_N . "_guthaben_coupon_to_user coupon2user ON (coupon.couponID = coupon2user.couponID)
+					WHERE 		" . $where . "
+					GROUP BY	coupon.couponID";
 			$row = WCF :: getDB()->getFirstRow($sql);
 		}
 
 		// handle result set
 		parent :: __construct($row);
+	}
+
+	/**
+	 * @param 	array 		$data
+	 */
+	protected function handleData($data)
+	{
+		parent :: handleData($data);
+
+		if (isset($data['userIDs']))
+			$this->userIDs = preg_split('/,/', $data['userIDs'], -1, PREG_SPLIT_NO_EMPTY);
+
+		if (isset($data['cashTimes']))
+			$this->cashTimes = preg_split('/,/', $data['cashTimes'], -1, PREG_SPLIT_NO_EMPTY);
+
+		if (count($this->userIDs) > 0)
+			$this->getUsers();
+	}
+
+	/**
+	 * get usernames for given users
+	 */
+	private function getUsers()
+	{
+		$sql = "SELECT 		username
+				FROM 		wcf" . WCF_N . "_user
+				WHERE 		userID IN ('" . implode("','", $this->userIDs) . "')
+				ORDER BY	userID ASC";
+
+		$result = WCF :: getDB()->sendQuery($sql);
+
+		while ($row = WCF :: getDB()->fetchArray($result))
+		{
+			$this->usernames[] = $row['username'];
+		}
 	}
 
 	/**
